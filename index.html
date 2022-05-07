@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/normalize.css" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>Fun With Fetch & Array Methods</h1>
+        <p class="header__subheading">Featuring characters from LoTR courtesy of <a href="https://the-one-api.dev/">the-one-api.dev</a></p>
+      </header>
+      <main>
+        <table id="table--character">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Race</th>
+              <th>Gold</th>
+            </tr>
+          </thead>
+          <tbody id="table--character__body"></tbody>
+        </table>
+        <div class="btn-group">
+          <button id="btn--add" class="btn--accent">Add Character</button>
+          <button id="btn--order">Order by Gold</button>
+          <button id="btn--filter">Filter by Hobbits</button>
+          <button id="btn--dragon">Dragon Attack</button>
+          <button id="btn--calc-gold">Calculate Total Gold</button>
+          <button id="btn--error">Simulate Fetch Error</button>
+        </div>
+      </main>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>

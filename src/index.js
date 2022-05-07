@@ -1,10 +1,4 @@
 // Todo
-// [ ] Timeout for fetch error - https://stackoverflow.com/questions/46946380/fetch-api-request-timeout
-// [ ] Change simulate fetch error button to use timeout
-// [ ] Loading spinner
-// [ ] Style table with no rows
-// [ ] Style table overflow
-// [ ] Publish to Github
 
 // Data
 let charactersData = [];
@@ -27,14 +21,18 @@ errorBtn.addEventListener('click', () => addRandomCharacter(true));
 
 // Fetch & add character to array
 async function addRandomCharacter(error) {
-  const res = await fetch('/.netlify/functions/token-hider') // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
+  const characterNumber = Math.floor(Math.random() * 932);
+  const res = await fetch('/.netlify/functions/token-hider?' + characterNumber) // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
     .then((res) => res.json())
     .then((newCharacterArray) => {
       const newCharacter = {
         // id: characterNumber,
         name: newCharacterArray.docs[0].name,
-        race: newCharacterArray.docs[0].race !== "NaN" ? newCharacterArray.docs[0].race : "Unknown", // Original data is polluted with occasional "NaN" values
-        gold: Math.floor(Math.random() * 1000)
+        race:
+          newCharacterArray.docs[0].race !== 'NaN'
+            ? newCharacterArray.docs[0].race
+            : 'Unknown', // Original data is polluted with occasional "NaN" values
+        gold: Math.floor(Math.random() * 1000),
       };
       charactersData.push(newCharacter);
       renderTable();

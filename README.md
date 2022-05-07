@@ -7,3 +7,4 @@
 - [ ] Loading spinner
 - [ ] Style table with no rows
 - [ ] Style table overflow
+- [ ] Update README using standard template

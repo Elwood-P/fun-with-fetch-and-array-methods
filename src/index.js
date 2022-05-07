@@ -1,5 +1,3 @@
-// Todo
-
 // Data
 let charactersData = [];
 const characterTable = document.getElementById('table--character');

@@ -8,6 +8,8 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "axios": "^0.26.1",
+    "qs": "^6.10.3",
     "tailwindcss-preflight": "1.0.1"
   },
   "devDependencies": {

@@ -8,59 +8,46 @@
 
 // Data
 let charactersData = [];
-const characterTable = document.getElementById("table--character");
-const characterTableBody = document.getElementById("table--character__body");
-const addBtn = document.getElementById("btn--add");
-const calcGoldBtn = document.getElementById("btn--calc-gold");
-const dragonBtn = document.getElementById("btn--dragon");
-const orderBtn = document.getElementById("btn--order");
-const filterBtn = document.getElementById("btn--filter");
-const errorBtn = document.getElementById("btn--error");
+const characterTable = document.getElementById('table--character');
+const characterTableBody = document.getElementById('table--character__body');
+const addBtn = document.getElementById('btn--add');
+const calcGoldBtn = document.getElementById('btn--calc-gold');
+const dragonBtn = document.getElementById('btn--dragon');
+const orderBtn = document.getElementById('btn--order');
+const filterBtn = document.getElementById('btn--filter');
+const errorBtn = document.getElementById('btn--error');
 
 // Event Listeners
-addBtn.addEventListener("click", () => addRandomCharacter());
-calcGoldBtn.addEventListener("click", () => renderTable(charactersData, true));
-dragonBtn.addEventListener("click", dragonAttack);
-orderBtn.addEventListener("click", orderByGold);
-filterBtn.addEventListener("click", filterByHobbits);
-errorBtn.addEventListener("click", () => addRandomCharacter(true));
+addBtn.addEventListener('click', () => addRandomCharacter());
+calcGoldBtn.addEventListener('click', () => renderTable(charactersData, true));
+dragonBtn.addEventListener('click', dragonAttack);
+orderBtn.addEventListener('click', orderByGold);
+filterBtn.addEventListener('click', filterByHobbits);
+errorBtn.addEventListener('click', () => addRandomCharacter(true));
 
 // Fetch & add character to array
 async function addRandomCharacter(error) {
-  const characterNumber = Math.floor(Math.random() * 932);
-  const url = `https://the-one-api.dev/v2/character?limit=1&race!=Dragons,Dragon&offset=${characterNumber}`;
-  try {
-    const response = await fetch(url, {
-      headers: {
-        Authorization: !error ? API_TOKEN : "wrong auth"
-      }
-    });
-
-    if (response.ok) {
-      const newCharacterArray = await response.json();
+  const res = await fetch('/.netlify/functions/token-hider') // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
+    .then((res) => res.json())
+    .then((newCharacterArray) => {
       const newCharacter = {
-        id: characterNumber,
+        // id: characterNumber,
         name: newCharacterArray.docs[0].name,
         race: newCharacterArray.docs[0].race !== "NaN" ? newCharacterArray.docs[0].race : "Unknown", // Original data is polluted with occasional "NaN" values
         gold: Math.floor(Math.random() * 1000)
       };
       charactersData.push(newCharacter);
       renderTable();
-    } else {
-      renderFetchError(`${response.status}: ${response.statusText}`);
-    }
-  } catch (err) {
-    renderFetchError(err);
-  }
+    });
 }
 
 //Render Table
 function renderTable(Data = charactersData, showTotal) {
-  if (document.getElementById("alert--fetchError")) {
-    document.getElementById("alert--fetchError").remove();
+  if (document.getElementById('alert--fetchError')) {
+    document.getElementById('alert--fetchError').remove();
   }
 
-  characterTableBody.innerHTML = "";
+  characterTableBody.innerHTML = '';
   for (const character of Data) {
     characterTableBody.innerHTML += `
     <tr>
@@ -106,19 +93,19 @@ function orderByGold() {
 
 function filterByHobbits() {
   const filteredCharactersData = charactersData.filter((character) => {
-    return character.race === "Hobbit";
+    return character.race === 'Hobbit';
   });
   renderTable(filteredCharactersData);
 }
 
 function renderFetchError(errorText) {
-  if (document.getElementById("alert--fetchError")) {
-    document.getElementById("alert--fetchError").remove();
+  if (document.getElementById('alert--fetchError')) {
+    document.getElementById('alert--fetchError').remove();
   }
 
-  const alertComponent = document.createElement("div");
-  alertComponent.setAttribute("id", "alert--fetchError");
-  alertComponent.className = "alert alert--error";
+  const alertComponent = document.createElement('div');
+  alertComponent.setAttribute('id', 'alert--fetchError');
+  alertComponent.className = 'alert alert--error';
   alertComponent.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 
     <span>${errorText}</span>
@@ -128,8 +115,7 @@ function renderFetchError(errorText) {
 
 // Init app - Populate data and render table
 function init() {
-  console.clear();
-  charactersData.push({ name: "Smaug", race: "Dragon", gold: 1000 }); // Add Dragon and fetch the rest from api
+  charactersData.push({ name: 'Smaug', race: 'Dragon', gold: 1000 }); // Add Dragon and fetch the rest from api
   for (let i = 0; i < 3; i++) {
     addRandomCharacter();
   }

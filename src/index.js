@@ -35,6 +35,8 @@ async function addRandomCharacter(error) {
       charactersData.push(newCharacter);
       renderTable();
     });
+    // https://answers.netlify.com/t/how-to-hide-an-api-key-on-a-html-page/35320/2
+    // Add catch
 }
 
 //Render Table

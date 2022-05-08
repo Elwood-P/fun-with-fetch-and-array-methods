@@ -17,8 +17,8 @@ $ npm install
 # Run local server
 $ netlify dev
 
-# Publish changes
-$ git push
+# Publish changes to netlify
+$ git push origin main
 ```
 
 ## TODO

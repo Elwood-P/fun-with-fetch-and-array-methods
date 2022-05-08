@@ -1,6 +1,5 @@
 # Fun with Fetch & Array Methods
-> 🧑‍🏫  
-> Part of a series of practice projects to sharpen skills in vanilla javascript.  
+> 🧑‍🏫 Part of a series of practice projects to sharpen skills in vanilla javascript.  
 > View project live: https://jsv-fetch-array.netlify.app/
 
 ## Skills practiced

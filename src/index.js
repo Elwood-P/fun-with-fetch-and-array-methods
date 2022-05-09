@@ -20,11 +20,15 @@ errorBtn.addEventListener('click', () => addRandomCharacter(true));
 // Fetch & add character to array
 async function addRandomCharacter(error) {
   const characterNumber = Math.floor(Math.random() * 932);
-  const res = await fetch('/.netlify/functions/token-hider?' + characterNumber) // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
-    .then((res) => res.json())
-    .then((newCharacterArray) => {
+
+  try {
+    const response = await fetch(
+      `/.netlify/functions/token-hider?${characterNumber}` // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
+    );
+    if (response.ok) {
+      const newCharacterArray = await response.json();
       const newCharacter = {
-        // id: characterNumber,
+        id: characterNumber,
         name: newCharacterArray.docs[0].name,
         race:
           newCharacterArray.docs[0].race !== 'NaN'
@@ -34,9 +38,12 @@ async function addRandomCharacter(error) {
       };
       charactersData.push(newCharacter);
       renderTable();
-    });
-    // https://answers.netlify.com/t/how-to-hide-an-api-key-on-a-html-page/35320/2
-    // Add catch
+    } else {
+      renderFetchError(`${response.status}: ${response.statusText}`)
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //Render Table

@@ -1,5 +1,8 @@
-// Data
+// Vars
 let charactersData = [];
+let loadingAnimation = null;
+
+// Consts
 const characterTable = document.getElementById('table--character');
 const characterTableBody = document.getElementById('table--character__body');
 const addBtn = document.getElementById('btn--add');
@@ -9,7 +12,7 @@ const orderBtn = document.getElementById('btn--order');
 const filterBtn = document.getElementById('btn--filter');
 const errorBtn = document.getElementById('btn--error');
 
-// Event Listeners
+// EventListeners
 addBtn.addEventListener('click', () => addRandomCharacter());
 calcGoldBtn.addEventListener('click', () => renderTable(charactersData, true));
 dragonBtn.addEventListener('click', dragonAttack);
@@ -20,7 +23,7 @@ errorBtn.addEventListener('click', () => addRandomCharacter(true));
 // Fetch & add character to array
 async function addRandomCharacter(error) {
   const characterNumber = Math.floor(Math.random() * 932);
-
+  loading();
   try {
     const response = await fetch(
       `/.netlify/functions/token-hider?${characterNumber}` // Netlify function makes fetch request to API in order to hide API token - see netlify/functions/token-hider/token-hider.js
@@ -37,22 +40,24 @@ async function addRandomCharacter(error) {
         gold: Math.floor(Math.random() * 1000),
       };
       charactersData.push(newCharacter);
-      renderTable();
+
+      setTimeout(() => {
+        renderTable();
+      }, 1000);
+
     } else {
-      renderFetchError(`${response.status}: ${response.statusText}`)
+      renderFetchError(`${response.status}: ${response.statusText}`);
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.log(error);
   }
 }
 
-//Render Table
+// Render Table
 function renderTable(Data = charactersData, showTotal) {
-  if (document.getElementById('alert--fetchError')) {
-    document.getElementById('alert--fetchError').remove();
-  }
+  clearTable();
 
-  characterTableBody.innerHTML = '';
   for (const character of Data) {
     characterTableBody.innerHTML += `
     <tr>
@@ -73,6 +78,31 @@ function renderTable(Data = charactersData, showTotal) {
     </tr>
     `;
   }
+}
+
+// Loading animation (css version: https://jsfiddle.net/f6vhway2/1/)
+function loading() {
+  clearTable();
+  let i = 0;
+  loadingAnimation = setInterval(animateDots, 500);
+
+  function animateDots() {
+    i = (i % 4) + 1;
+    const loadingDots = '.'.repeat(i - 1);
+    characterTableBody.innerHTML = `Loading${loadingDots}`;
+  }
+}
+
+// Clear Table
+function clearTable() {
+  // Clear timer
+  clearInterval(loadingAnimation);
+  // Clear alert
+  if (document.getElementById('alert--fetchError')) {
+    document.getElementById('alert--fetchError').remove();
+  }
+  // Clear table data
+  characterTableBody.innerHTML = '';
 }
 
 // Button functions

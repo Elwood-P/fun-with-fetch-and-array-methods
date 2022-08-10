@@ -23,7 +23,7 @@ $ git push origin main
 
 ## Todo
 - [x] Publish to Github
-- [x] Move characterNumber to index.js and pass to token-hider in querystring (see https://github.com/AadhiKeerthanan/token-hider-netlify/blob/main/functions/token-hider/token-hider.js)
+- [x] Move characterNumber to index.js and pass to token-hider in querystring - https://github.com/AadhiKeerthanan/token-hider-netlify/blob/main/functions/token-hider/token-hider.js
 - [x] Fix renderFetchError and alerts of errors from API fetch
 - [ ] Fix deliberate fetch error button
 - [ ] Timeout for fetch error - https://stackoverflow.com/questions/46946380/fetch-api-request-timeout

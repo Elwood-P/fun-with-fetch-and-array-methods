@@ -10,7 +10,7 @@
 - Array methods
 
 ## Setup
-```
+```shell
 # Install dependencies
 $ npm install
 

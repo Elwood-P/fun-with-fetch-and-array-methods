@@ -11,9 +11,6 @@
 
 ## Setup
 ```shell
-# Install dependencies
-$ npm install
-
 # Run local server
 $ netlify dev
 

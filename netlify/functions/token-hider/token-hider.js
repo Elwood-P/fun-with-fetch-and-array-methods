@@ -7,7 +7,6 @@ const qs = require('qs');
 
 const handler = async function (event) {
   const characterNumber = qs.stringify(event.queryStringParameters)
-  console.log(characterNumber);
   const { API_TOKEN } = process.env;
 
   const URL = `https://the-one-api.dev/v2/character?limit=1&race!=Dragons,Dragon&offset=${characterNumber}`;

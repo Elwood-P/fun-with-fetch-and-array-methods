@@ -7,7 +7,7 @@
 - Fetch data from API using async/await
 - Handle fetch errors gracefully
 - Fetch error handling
-- Secure API secrets using Netlify functions - read the [blog post]https://elwoodp.dev/articles/how-to-hide-api-keys/ detailing the challenge
+- Secure API secrets using Netlify functions - read the [blog post](https://elwoodp.dev/articles/how-to-hide-api-keys/) detailing the challenge
 - Demonstrate proficiency in using array methods
 
 ## Technologies

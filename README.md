@@ -1,13 +1,13 @@
 # Fun with Fetch & Array Methods
 
-> One of several projects undertaken to sharpen my skill in vanilla javascript.  
+> One of several projects undertaken to sharpen my skill in vanilla javascript.
 > [View project live](https://jsv-fetch-array.netlify.app/)
 
 ## Key Features
 - Fetch data from API using async/await
 - Handle fetch errors gracefully
 - Fetch error handling
-- Secure API secrets using Netlify functions (read the [blog post](http://localhost:3000/articles/how-to-hide-api-keys) detailing the challenge)
+- Secure API secrets using Netlify functions - read the [blog post]https://elwoodp.dev/articles/how-to-hide-api-keys/ detailing the challenge
 - Demonstrate proficiency in using array methods
 
 ## Technologies
@@ -29,3 +29,4 @@ $ git push origin main
 - [ ] Change simulate fetch error button to use timeout
 - [ ] Add a loading spinner
 - [ ] Style table with no rows and handle table overflow
+
